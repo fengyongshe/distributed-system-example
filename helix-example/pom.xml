@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>helix-example</artifactId>
+
+    <parent>
+        <groupId>org.apache.helix.recipes</groupId>
+        <artifactId>recipes</artifactId>
+        <version>0.8.1</version>
+    </parent>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.25</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.7.14</version>
+            <classifier>sources</classifier>
+            <exclusions>
+                <exclusion>
+                    <groupId>javax.mail</groupId>
+                    <artifactId>mail</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>javax.jms</groupId>
+                    <artifactId>jms</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.sun.jdmk</groupId>
+                    <artifactId>jmxtools</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.sun.jmx</groupId>
+                    <artifactId>jmxri</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>6.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.helix</groupId>
+            <artifactId>helix-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-jci-fam</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.101tec</groupId>
+            <artifactId>zkclient</artifactId>
+            <version>0.5</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>1.4</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.helix</groupId>
+            <artifactId>helix-core</artifactId>
+            <version>0.8.1</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>appassembler-maven-plugin</artifactId>
+                    <configuration>
+                        <!-- Set the target configuration directory to be used in the bin scripts -->
+                        <!-- <configurationDirectory>conf</configurationDirectory> -->
+                        <!-- Copy the contents from "/src/main/config" to the target configuration
+                          directory in the assembled application -->
+                        <!-- <copyConfigurationDirectory>true</copyConfigurationDirectory> -->
+                        <!-- Include the target configuration directory in the beginning of
+                          the classpath declaration in the bin scripts -->
+                        <includeConfigurationDirectoryInClasspath>true</includeConfigurationDirectoryInClasspath>
+                        <assembleDirectory>${project.build.directory}/${project.artifactId}-pkg</assembleDirectory>
+                        <!-- Extra JVM arguments that will be included in the bin scripts -->
+                        <extraJvmArguments>-Xms512m -Xmx512m</extraJvmArguments>
+                        <!-- Generate bin scripts for windows and unix pr default -->
+                        <platforms>
+                            <platform>windows</platform>
+                            <platform>unix</platform>
+                        </platforms>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>assemble</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.rat</groupId>
+                    <artifactId>apache-rat-plugin</artifactId>
+                    <configuration>
+                        <excludes combine.children="append">
+                            <exclude>data/localhost_**/**</exclude>
+                        </excludes>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>appassembler-maven-plugin</artifactId>
+                <configuration>
+                    <programs>
+                        <program>
+                            <mainClass>org.apache.helix.filestore.IntegrationTest</mainClass>
+                            <name>quickdemo</name>
+                        </program>
+                    </programs>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.3</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
