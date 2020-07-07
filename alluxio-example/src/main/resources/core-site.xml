@@ -21,8 +21,8 @@
     </property>
     
     <property>
-      <name>ha.zookeeper.quorum</name>
-      <value>cmhhost3.novalocal:2181,cmhhost2.novalocal:2181,cmhhost1.novalocal:2181</value>
+      <name>ha.zookeecmhhost3per.quorum</name>
+      <value>localhost:2181</value>
     </property>
     
     <property>
@@ -97,12 +97,12 @@
     
     <property>
       <name>hadoop.proxyuser.root.hosts</name>
-      <value>cmhhost3.novalocal</value>
+      <value>localhost</value>
     </property>
     
     <property>
       <name>hadoop.proxyuser.yarn.hosts</name>
-      <value>cmhhost2.novalocal,cmhhost3.novalocal</value>
+      <value>localhost</value>
     </property>
     
     <property>
@@ -137,7 +137,7 @@
     
     <property>
       <name>hadoop.security.group.mapping.ldap.bind.password</name>
-      <value>E@8jwWj5_e</value>
+      <value>passwd</value>
     </property>
     
     <property>
