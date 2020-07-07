@@ -12,7 +12,7 @@
     <artifactId>vertx-examples</artifactId>
 
     <properties>
-        <vertx.version>3.5.3</vertx.version>
+        <vertx.version>3.9.1</vertx.version>
         <main.class>com.fys.example.cluster.ConsumerApp</main.class>
     </properties>
 
